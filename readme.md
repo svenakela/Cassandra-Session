@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/svenakela/Cassandra-Session.png)](https://travis-ci.org/svenakela/Cassandra-Session)
 [![codecov.io](https://codecov.io/github/svenakela/Cassandra-Session/coverage.svg?branch=master)](https://codecov.io/github/svenakela/Cassandra-Session?branch=master)
+[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![forthebadge](http://forthebadge.com/badges/gluten-free.svg)](http://forthebadge.com)
 
 # Cassandra Session #
 
