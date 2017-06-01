@@ -22,8 +22,6 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 
-import se.primenta.common.persistence.CassandraExecutor;
-import se.primenta.common.persistence.CassandraSession;
 import se.primenta.common.persistence.test.CassandraTestBase;
 
 public class CassandraExecutorTest extends CassandraTestBase {
@@ -49,11 +47,12 @@ public class CassandraExecutorTest extends CassandraTestBase {
     }
 
     @Test
-    public void executeSync() {
+    public void executeSync() throws InterruptedException {
 
         final CassandraExecutor exec = session.getExecutor();
 
         assertEquals(0, exec.execute(new SimpleStatement("select * from testexecutor where id = 666")).all().size());
+        Thread.sleep(SLEEP);
         assertEquals(0,
                 exec.execute(new SimpleStatement("insert into testexecutor(id, test) values (1, 'x')")).all().size());
     }
