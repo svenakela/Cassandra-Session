@@ -41,6 +41,8 @@ dependencies {
 }
 ```
 
+Other [build tools examples can be found here](https://jitpack.io/#svenakela/Cassandra-Session).
+
 ### Logging ###
 
 Both the library and the underlying driver are using SLF4J for logging.
