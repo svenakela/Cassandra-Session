@@ -1,11 +1,9 @@
-package com.tingcore.common.persistence;
+package se.primenta.common.persistence;
 
 import java.util.concurrent.Executors;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.ResultSetFuture;
@@ -24,8 +22,7 @@ public final class CassandraExecutorImpl implements CassandraExecutor {
 
     private final Session session;
 
-    private static final Logger LOGGER = LogManager.getLogger(CassandraSessionImpl.class);
-    private static final Marker EXEC = MarkerManager.getMarker("CASSANDRA_EXECUTOR");
+    private static final Logger LOGGER = LoggerFactory.getLogger(CassandraSessionImpl.class);
 
     private final ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
 
@@ -48,9 +45,9 @@ public final class CassandraExecutorImpl implements CassandraExecutor {
             public void onFailure(final Throwable t) {
 
                 if (t instanceof QueryValidationException) {
-                    LOGGER.error(EXEC, "Fire and Forget failed. {}", statement.toString(), t);
+                    LOGGER.error("Fire and Forget failed. {}", statement.toString(), t);
                 } else {
-                    LOGGER.error(EXEC, "Async persist failed for {}, {}. Backing off to a serial execution",
+                    LOGGER.error("Async persist failed for {}, {}. Backing off to a serial execution",
                             statement.toString(), t);
                     retryExecute(statement);
                 }
@@ -88,7 +85,7 @@ public final class CassandraExecutorImpl implements CassandraExecutor {
                 // It will not be handled by the DefaultPolicy and we need to retry manually.
                 // But lets not care what type of timeout reason there is, lets retry anyway.
                 if (tries < MAX_STORE_RETRIES) {
-                    LOGGER.warn(EXEC, "Storing data failed with " + wte.getWriteType() + " problems, will retry.");
+                    LOGGER.warn("Storing data failed with " + wte.getWriteType() + " problems, will retry.");
                 } else {
                     throw new PersistenceRuntimeException("Timeout problems when storing data.", wte);
                 }

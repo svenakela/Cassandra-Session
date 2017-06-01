@@ -1,4 +1,4 @@
-package com.tingcore.common.persistence;
+package se.primenta.common.persistence;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,6 +11,9 @@ import org.junit.Test;
 import com.datastax.driver.core.SimpleStatement;
 import com.datastax.driver.core.Statement;
 
+import se.primenta.common.persistence.CassandraExecutor;
+import se.primenta.common.persistence.CassandraSession;
+import se.primenta.common.persistence.ColumnDefinition;
 import se.primenta.common.persistence.test.CassandraTestBase;
 
 public class CassandraSessionTest extends CassandraTestBase {

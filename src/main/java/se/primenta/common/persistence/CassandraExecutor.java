@@ -1,4 +1,4 @@
-package com.tingcore.common.persistence;
+package se.primenta.common.persistence;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.ResultSet;

@@ -1,4 +1,4 @@
-package com.tingcore.common.persistence;
+package se.primenta.common.persistence;
 
 /**
  * Save to the storage layer interface.

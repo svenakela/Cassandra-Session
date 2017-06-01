@@ -1,4 +1,4 @@
-package com.tingcore.common.persistence;
+package se.primenta.common.persistence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -22,6 +22,8 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 
+import se.primenta.common.persistence.CassandraExecutor;
+import se.primenta.common.persistence.CassandraSession;
 import se.primenta.common.persistence.test.CassandraTestBase;
 
 public class CassandraExecutorTest extends CassandraTestBase {

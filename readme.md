@@ -40,6 +40,10 @@ dependencies {
 }
 ```
 
+### Logging ###
+
+Both the library and the underlying driver are using SLF4J for logging.
+
 ### Connect ###
 
 To create a session there is a fluent interface Builder that configures and builds the CassandraSession object:
@@ -58,7 +62,7 @@ CassandraSession session = new CassandraSession.SessionBuilder(contactpoints)
 ```
 
 * contactpoints - Nodes to contact in the C* cluster for initial connect
-  * c1.tingcore-test.com, c2.tingcore-test.com, c3.tingcore-test.com
+  * seed-server1, seed-serv2, seed-server3
 * datacenter - When a cluster is splitted in datacenters, specify which to connect to
   * Not in use (yet) at Tingcore, set an empty String
 * keyspace - The application specific keyspace name
@@ -92,12 +96,6 @@ private final CassandraExecutor executor = session.getExecutor();
 * Use `QueryBuilder` to create statements
 * Use a Table class with constants or an enum to avoid repeated string literals in the code
 
-For an example how to use the Session and the Executor, have a look at following classes.
-
-[Persistence Configuration](https://ontime.tingco.com:7990/projects/FLEX/repos/mdr-consumer/browse/src/main/java/com/tingcore/flexipower/mdr/config/PersistenceConfiguration.java)
-
-[Persister with Executor](https://ontime.tingco.com:7990/projects/FLEX/repos/mdr-consumer/browse/src/main/java/com/tingcore/flexipower/mdr/persistence/MdrPlainPersister.java)
-
 If mapping is preferred a `MappingManager` is created by the CasandraSession and it can be used as well. Please note that by using the mapper all the automatic fail management is not used. This could still be OK for a non performance application. MappingManager and the Mapper created with the manager are thread safe and should be shared within the application.
 
 [How to use the mapper is well documented here](http://docs.datastax.com/en/developer/java-driver/3.2/manual/object_mapper/using/)
@@ -119,7 +117,7 @@ Please note that these values are non time zoned and you should make sure the va
 
 ### Write tests ###
 
-To be able to run tests with a persistence layer the test framework [Cassandra Testbase](https://ontime.tingco.com:7990/projects/CT/repos/cassandra-testbase/browse) can be used.
+To be able to run tests with a persistence layer the test framework [Cassandra Testbase](https://github.com/svenakela/Cassandra-Testbase) can be used.
 
 To write isolated unit tests for POJO classes it is easy to mock the library. Following example mocks the persistence layer totally (which may not be needed) to verify that the values are prepared for insert.
 

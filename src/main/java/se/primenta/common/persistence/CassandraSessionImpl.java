@@ -1,13 +1,11 @@
-package com.tingcore.common.persistence;
+package se.primenta.common.persistence;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.DataType;
@@ -41,8 +39,7 @@ public final class CassandraSessionImpl implements CassandraSession {
     private final Session sessionSingleton;
     private final MappingManager mappingManager;
 
-    private static final Logger LOGGER = LogManager.getLogger(CassandraSessionImpl.class);
-    private static final Marker CASSANDRA = MarkerManager.getMarker("CASSANDRA_SESSION");
+    private static final Logger LOGGER = LoggerFactory.getLogger(CassandraSessionImpl.class);
 
     private static final String CREATE_KEYSPACE = "CREATE KEYSPACE IF NOT EXISTS %s WITH REPLICATION = %s";
 
@@ -91,7 +88,7 @@ public final class CassandraSessionImpl implements CassandraSession {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                LOGGER.info(CASSANDRA, "Graceful session close is initiated");
+                LOGGER.info("Graceful session close is initiated");
                 sessionSingleton.close();
             }
         });
@@ -124,7 +121,7 @@ public final class CassandraSessionImpl implements CassandraSession {
 
     private Cluster createCluster(final String user, final String password) {
 
-        LOGGER.info(CASSANDRA, "Creating session for {}, replication factor {}, datacenter {}", nodes, replication,
+        LOGGER.info("Creating session for {}, replication factor {}, datacenter {}", nodes, replication,
                 datacenter);
 
         final Cluster.Builder builder = Cluster.builder()
@@ -150,22 +147,22 @@ public final class CassandraSessionImpl implements CassandraSession {
 
     private void ensureKeyspace(final Session sess) {
 
-        LOGGER.info(CASSANDRA, "Ensuring keyspace");
+        LOGGER.info("Ensuring keyspace");
         try {
             sess.execute(String.format(CREATE_KEYSPACE, keyspace, replication));
         } catch (QueryValidationException | QueryExecutionException e) {
-            LOGGER.error(CASSANDRA, "Failed to create keyspace", e);
+            LOGGER.error("Failed to create keyspace", e);
             throw new PersistenceRuntimeException(e);
         }
     }
 
     private void ensureColumnfamilies(final Session sess, final List<? extends ColumnDefinition> definitions) {
 
-        LOGGER.info(CASSANDRA, "Executing table definitions");
+        LOGGER.info("Executing table definitions");
         try {
             definitions.stream().map(ColumnDefinition::getStatements).flatMap(List::stream).forEach(sess::execute);
         } catch (QueryValidationException | QueryExecutionException e) {
-            LOGGER.error(CASSANDRA, "Failed to create column families from definition", e);
+            LOGGER.error("Failed to create column families from definition", e);
             throw new PersistenceRuntimeException(e);
         }
     }
