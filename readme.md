@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/svenakela/Cassandra-Session.png)](https://travis-ci.org/svenakela/Cassandra-Session)
+[![codecov.io](https://codecov.io/github/svenakela/Cassandra-Session/coverage.svg?branch=master)](https://codecov.io/github/svenakela/Cassandra-Session?branch=master)
+
 # Cassandra Session #
 
 Library wrapping a cassandra driver and takes care of all the configuration and async calls, making your code easier to write and maintain.
