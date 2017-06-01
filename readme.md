@@ -65,13 +65,12 @@ CassandraSession session = new CassandraSession.SessionBuilder(contactpoints)
 * contactpoints - Nodes to contact in the C* cluster for initial connect
   * seed-server1, seed-serv2, seed-server3
 * datacenter - When a cluster is splitted in datacenters, specify which to connect to
-  * Not in use (yet) at Tingcore, set an empty String
 * keyspace - The application specific keyspace name
 * replication - The strategy of replication, which differs if this is a dev, test or prod environment
   * dev - "{'class': 'SimpleStrategy', 'replication_factor': '1'}"
   * test - "{'class': 'SimpleStrategy', 'replication_factor': '3'}"
   * prod - "{'class': 'SimpleStrategy', 'replication_factor': '3'}"
-  * Can also be set to NetworkStrategy etc, but not in use at Tingcore
+  * Can also be set to NetworkStrategy etc
 * user - The normal operation user
 * password - ...
 * preprocess statements - A list of statements that should be executed before we are ready
