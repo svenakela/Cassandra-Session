@@ -1,0 +1,56 @@
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+dependency-reduced-pom.xml
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.ipr
+*.iml
+
+### NetBeans ###
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### Eclipse ###
+*.eclipse
+*.project
+*.classpath
+.extract*
+.settings*
+
+### Plugins ###
+*.eclipse-pmd
+**.metadata
+*.pmd
+*.checkstyle
+*-result.html
+rebel_project.xml
+
+### npm ###
+node
+node_modules
+frontend-dest
+data/
+
+.DS_Store
+*.py~
+*.swp
+*.pyc
+*~
+target/
+*#
+*.log
+/bin/
