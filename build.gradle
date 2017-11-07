@@ -13,19 +13,14 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-configurations.all {
-    exclude module: "logback-classic"
-}
-
 dependencies {
 
-    compile group: 'com.google.guava', name: 'guava', version: '19.0'
-
+    compile('com.google.guava':'guava':'19.0')
+    
     compile('org.apache.commons:commons-lang3:3.5')
     compile('org.apache.commons:commons-collections4:4.1')
     compile('org.apache.logging.log4j:log4j-api:2.8')
     compile('org.apache.logging.log4j:log4j-core:2.8')
-    compile('org.apache.logging.log4j:log4j-slf4j-impl:2.0.1')
 
     compile('com.datastax.cassandra:cassandra-driver-core:+')
     compile('com.datastax.cassandra:cassandra-driver-mapping:+')
@@ -35,7 +30,7 @@ dependencies {
     testCompile('org.assertj:assertj-core:3.6.2')
     testCompile('org.codehaus.groovy:groovy-all:2.4.1')
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4')
-    testCompile('com.github.svenakela:Cassandra-Testbase:+')
+    testCompile('com.github.svenakela:Cassandra-Testbase:1.2.0')
 }
 
 jacocoTestReport {
